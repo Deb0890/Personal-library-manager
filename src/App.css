@@ -19,7 +19,7 @@ h1 {
   width: 100%;
 }
 
-.title-section {
+#title-section {
   position: relative;
   text-align: center;
 }
@@ -29,7 +29,7 @@ h1 {
   margin-bottom: 10px;
 }
 
-.add-a-book {
+#add-a-book {
   padding: 5px 10px;
   /* border: none; */
   border-radius: 10px;

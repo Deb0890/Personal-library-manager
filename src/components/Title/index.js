@@ -2,9 +2,9 @@ import React from "react";
 
 const Title = () => {
   return (
-    <div className="title-section">
+    <div id="title-section">
       <h2 className="title">The Library</h2>
-      <button className="add-a-book">Add a Book</button>
+      <button id="add-a-book">Add a Book</button>
       <hr />
     </div>
   );
