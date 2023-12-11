@@ -4,6 +4,7 @@
   /* width: 100%; */
   height: 100px;
   display: flex;
+  margin-bottom: 20px;
   /* flex-direction: row; */
 }
 
@@ -18,6 +19,33 @@ h1 {
   width: 100%;
 }
 
-h2 {
+.title-section {
+  position: relative;
+  text-align: center;
+}
+
+.title {
   font-family: "Inter";
+  margin-bottom: 10px;
+}
+
+.add-a-book {
+  padding: 5px 10px;
+  /* border: none; */
+  border-radius: 10px;
+  box-shadow: none;
+  background-color: #fae4dc;
+  border-color: #fae4dc;
+}
+
+hr {
+  /* border: 3px solid #623412; */
+  position: relative;
+  top: 20px;
+  border: none;
+  height: 8px;
+  width: 60%;
+  background: #623412;
+  margin: auto;
+  margin-bottom: 10px;
 }
