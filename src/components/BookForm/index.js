@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const BookForm = () => {
   return (
     <>
-      success!
+      Success!
       {/* <form className="form">
         <label htmlFor="form-title">Book title</label>
         <input type="text" id="form-title"></input>
