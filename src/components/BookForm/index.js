@@ -3,31 +3,39 @@ import React, { useState } from "react";
 const BookForm = () => {
   return (
     <>
-      Success!
-      {/* <form className="form">
+      <h3>Add a Book</h3>
+      <form className="form">
         <label htmlFor="form-title">Book title</label>
-        <input type="text" id="form-title"></input>
+        <input type="text" id="form-title" />
         <label htmlFor="form-author-fn">Author FIRST NAME</label>
-        <input type="text" id="form-author-fn"></input>
+        <input type="text" id="form-author-fn" />
         <label htmlFor="form-author-ln">Author LAST NAME</label>
-        <input type="text" id="form-author-ln"></input>
+        <input type="text" id="form-author-ln" />
         <label htmlFor="form-upload-img"></label>
         <input
           type="file"
           id="form-upload-img"
           placeholder="Upload an image of your copy:"
-        ></input>
+        />
         <label htmlFor="form-isbn">ISBN</label>
-        <input type="text" id="form-isbn"></input>
+        <input type="text" id="form-isbn" />
         <label htmlFor="form-pub-year">Publication year</label>
-        <input type="number" id="form-pub-year"></input>
+        <input type="number" id="form-pub-year" />
         <label htmlFor="form-genre-one"></label>
-        <input type="select" id="form-genre-one"></input>
-        <label htmlFor="form-genre-two"></label>
-        <input type="select" id="form-genre-two">
-          <option>genre 1</option>
-        </input>
-      </form> */}
+        <select type="select" id="form-genre-one">
+          <option value="chooseAGenre">Choose a genre</option>
+          <option value="genreOne">genre one</option>
+          <option value="genreTwo">genre two</option>
+        </select>
+        <select type="select" id="form-genre-two">
+          <option value="chooseASecondaryGenre">
+            Choose a secondary genre (Optional)
+          </option>
+          <option value="genreOne">genre one</option>
+          <option value="genreTwo">genre two</option>
+        </select>
+        <submit></submit>
+      </form>
     </>
   );
 };
