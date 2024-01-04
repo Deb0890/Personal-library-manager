@@ -14,7 +14,7 @@ const TitleSection = () => {
       <button id="add-a-book" onClick={toggleModal}>
         Add a Book
       </button>
-      {modal && <BookForm />}
+      {modal && <BookForm closeModal={toggleModal} />}
       <hr />
     </div>
   );
