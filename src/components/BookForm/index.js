@@ -5,7 +5,6 @@ const BookForm = ({ closeModal }) => {
     <div className="modal">
       <div className="modal-content">
         <h3>Add a Book</h3>
-        <button onClick={closeModal}>Close</button>
         <form className="form">
           <label htmlFor="form-title">Book title</label>
           <input type="text" id="form-title" />
@@ -36,6 +35,7 @@ const BookForm = ({ closeModal }) => {
             <option value="genreOne">genre one</option>
             <option value="genreTwo">genre two</option>
           </select>
+          <button onClick={closeModal}>Close</button>
           <input type="submit"></input>
         </form>
       </div>
