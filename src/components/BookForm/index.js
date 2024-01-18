@@ -1,18 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const BookForm = ({ closeModal }) => {
+  const [formData, setFormData] = useState({
+    booktitle: "",
+    authorfirstname: "",
+    authorlastname: "",
+    image: "",
+    isbn: "",
+    publicationyear: "",
+    genreone: "",
+    genretwo: "",
+  });
+  console.log(formData.booktitle);
+
+  useEffect(() => {
+    localStorage.setItem("bookData", JSON.stringify(data));
+  }, [data]);
+
+  // const handleSubmit = () => {};
   return (
     <div className="modal">
       <div className="modal-content">
         <h3>Add a Book</h3>
-        <form className="form" id="main-form">
+        <form action="POST" className="form" id="main-form">
           <div className="form-group">
-            <label htmlFor="form-title">Book title</label>
-            <input type="text" id="form-title" />
+            <label htmlFor="form-book-title">Book title</label>
+            <input
+              type="text"
+              id="form-book-title"
+              onChange={(e) => setFormData({ booktitle: e.target.value })}
+              value={data.booktitle}
+            />
           </div>
           <div className="form-group">
             <label htmlFor="form-author-fn">Author FIRST NAME</label>
-            <input type="text" id="form-author-fn" />
+            <input
+              type="text"
+              id="form-author-fn"
+              onChange={(e) => {
+                setFormData({ authorfirstname: e.target.value });
+              }}
+              value={data.authorfirstname}
+            />
           </div>
           <div className="form-group">
             <label htmlFor="form-author-ln">Author LAST NAME</label>
@@ -26,14 +55,14 @@ const BookForm = ({ closeModal }) => {
               placeholder="Upload an image of your copy:"
             />
           </div>
-          <div className="form-group">
+          {/* <div className="form-group">
             <label htmlFor="form-isbn">ISBN</label>
             <input type="text" id="form-isbn" />
           </div>
           <div className="form-group">
             <label htmlFor="form-pub-year">Publication year</label>
             <input type="number" id="form-pub-year" />
-          </div>
+          </div> */}
           <div className="form-group">
             <label htmlFor="form-genre-one">Genre 1</label>
             <select type="select" id="form-genre-one">
@@ -57,7 +86,9 @@ const BookForm = ({ closeModal }) => {
           <button form="main-form" onClick={closeModal}>
             Close
           </button>
-          <input form="main-form" type="submit"></input>
+          <button form="main-form" type="submit">
+            Save
+          </button>
         </div>
       </div>
     </div>
