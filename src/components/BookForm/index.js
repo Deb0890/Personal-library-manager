@@ -6,30 +6,39 @@ const BookForm = ({ closeModal }) => {
     authorfirstname: "",
     authorlastname: "",
     image: "",
-    isbn: "",
-    publicationyear: "",
     genreone: "",
     genretwo: "",
   });
-  console.log(formData.booktitle);
+  // console.log(formData.booktitle);
 
-  useEffect(() => {
-    localStorage.setItem("bookData", JSON.stringify(data));
-  }, [data]);
+  // useEffect(() => {
+  //   localStorage.setItem("bookData", JSON.stringify(data));
+  // }, [data]);
 
-  // const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    closeModal();
+    console.log(formData);
+  };
   return (
     <div className="modal">
       <div className="modal-content">
         <h3>Add a Book</h3>
-        <form action="POST" className="form" id="main-form">
+        <form
+          action="POST"
+          className="form"
+          id="main-form"
+          onSubmit={handleSubmit}
+        >
           <div className="form-group">
             <label htmlFor="form-book-title">Book title</label>
             <input
               type="text"
               id="form-book-title"
-              onChange={(e) => setFormData({ booktitle: e.target.value })}
-              value={data.booktitle}
+              onChange={(e) =>
+                setFormData({ ...formData, booktitle: e.target.value })
+              }
+              value={formData.booktitle}
             />
           </div>
           <div className="form-group">
@@ -38,9 +47,9 @@ const BookForm = ({ closeModal }) => {
               type="text"
               id="form-author-fn"
               onChange={(e) => {
-                setFormData({ authorfirstname: e.target.value });
+                setFormData({ ...formData, authorfirstname: e.target.value });
               }}
-              value={data.authorfirstname}
+              value={formData.authorfirstname}
             />
           </div>
           <div className="form-group">
@@ -55,14 +64,6 @@ const BookForm = ({ closeModal }) => {
               placeholder="Upload an image of your copy:"
             />
           </div>
-          {/* <div className="form-group">
-            <label htmlFor="form-isbn">ISBN</label>
-            <input type="text" id="form-isbn" />
-          </div>
-          <div className="form-group">
-            <label htmlFor="form-pub-year">Publication year</label>
-            <input type="number" id="form-pub-year" />
-          </div> */}
           <div className="form-group">
             <label htmlFor="form-genre-one">Genre 1</label>
             <select type="select" id="form-genre-one">
@@ -82,14 +83,12 @@ const BookForm = ({ closeModal }) => {
             </select>
           </div>
         </form>
-        <div className="main-form-buttons">
-          <button form="main-form" onClick={closeModal}>
-            Close
-          </button>
-          <button form="main-form" type="submit">
-            Save
-          </button>
-        </div>
+        <button form="main-form" onClick={closeModal}>
+          Cancel
+        </button>
+        <button form="main-form" type="submit">
+          Save
+        </button>
       </div>
     </div>
   );
