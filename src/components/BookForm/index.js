@@ -54,7 +54,14 @@ const BookForm = ({ closeModal }) => {
           </div>
           <div className="form-group">
             <label htmlFor="form-author-ln">Author LAST NAME</label>
-            <input type="text" id="form-author-ln" />
+            <input
+              type="text"
+              id="form-author-ln"
+              onChange={(e) => {
+                setFormData({ ...formData, authorlastname: e.target.value });
+              }}
+              value={formData.authorlastname}
+            />
           </div>
           <div className="form-group">
             <label htmlFor="form-upload-img"></label>
@@ -62,11 +69,22 @@ const BookForm = ({ closeModal }) => {
               type="file"
               id="form-upload-img"
               placeholder="Upload an image of your copy:"
+              onChange={(e) => {
+                setFormData({ ...formData, image: e.target.value });
+              }}
+              value={formData.image}
             />
           </div>
           <div className="form-group">
             <label htmlFor="form-genre-one">Genre 1</label>
-            <select type="select" id="form-genre-one">
+            <select
+              type="select"
+              id="form-genre-one"
+              onChange={(e) => {
+                setFormData({ ...formData, genreone: e.target.value });
+              }}
+              value={formData.genreone}
+            >
               <option value="chooseAGenre">Choose a genre</option>
               <option value="genreOne">genre one</option>
               <option value="genreTwo">genre two</option>
@@ -74,7 +92,14 @@ const BookForm = ({ closeModal }) => {
           </div>
           <div className="form-group">
             <label htmlFor="form-genre-one">Genre 2</label>
-            <select type="select" id="form-genre-two">
+            <select
+              type="select"
+              id="form-genre-two"
+              onChange={(e) => {
+                setFormData({ ...formData, genretwo: e.target.value });
+              }}
+              value={formData.genretwo}
+            >
               <option value="chooseASecondaryGenre">
                 Choose a secondary genre (Optional)
               </option>
