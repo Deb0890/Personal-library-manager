@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Header, TitleSection } from "./components";
+import { Header } from "./components";
+import { Books } from "./pages";
 
 const App = () => {
   return (
     <>
       <Header />
-      <TitleSection />
+      <Books />
     </>
   );
 };

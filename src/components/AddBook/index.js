@@ -1,32 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-const TitleSection = () => {
+const AddBook = () => {
   const [modal, setModal] = useState(false);
-  const [formData, setFormData] = useState({
-    booktitle: "",
-    authorfirstname: "",
-    authorlastname: "",
-    image: "",
-    genreone: "",
-    genretwo: "",
-  });
-
+  // const [formData, setFormData] = useState({
+  //   booktitle: "",
+  //   authorfirstname: "",
+  //   authorlastname: "",
+  //   image: "",
+  //   genreone: "",
+  //   genretwo: "",
+  // });
   const toggleModal = () => {
     setModal(!modal);
-    setFormData({
-      booktitle: "",
-      authorfirstname: "",
-      authorlastname: "",
-      image: "",
-      genreone: "",
-      genretwo: "",
-    });
+    // setFormData({
+    //   booktitle: "",
+    //   authorfirstname: "",
+    //   authorlastname: "",
+    //   image: "",
+    //   genreone: "",
+    //   genretwo: "",
+    // });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     toggleModal();
-    console.log(formData);
+    const form = new FormData(e.currentTarget);
+    const data = Object.fromEntries(form);
+    // Append new form data to the existing list
+    const updatedFormDataList = [...formDataList, data];
+    // Save updated form data list to local storage
+    localStorage.setItem("formDataList", JSON.stringify(updatedFormDataList));
+    setFormDataList(updatedFormDataList);
   };
 
   return (
@@ -50,10 +55,11 @@ const TitleSection = () => {
                 <input
                   type="text"
                   id="form-book-title"
-                  onChange={(e) => {
-                    setFormData({ ...formData, booktitle: e.target.value });
-                  }}
-                  value={formData.booktitle}
+                  name="booktitle"
+                  // onChange={(e) => {
+                  //   setFormData({ ...formData, booktitle: e.target.value });
+                  // }}
+                  // value={formData.booktitle}
                 />
               </div>
               <div className="form-group">
@@ -61,13 +67,14 @@ const TitleSection = () => {
                 <input
                   type="text"
                   id="form-author-fn"
-                  onChange={(e) => {
-                    setFormData({
-                      ...formData,
-                      authorfirstname: e.target.value,
-                    });
-                  }}
-                  value={formData.authorfirstname}
+                  name="authorfirstname"
+                  // onChange={(e) => {
+                  //   setFormData({
+                  //     ...formData,
+                  //     authorfirstname: e.target.value,
+                  //   });
+                  // }}
+                  // value={formData.authorfirstname}
                 />
               </div>
               <div className="form-group">
@@ -75,13 +82,14 @@ const TitleSection = () => {
                 <input
                   type="text"
                   id="form-author-ln"
-                  onChange={(e) => {
-                    setFormData({
-                      ...formData,
-                      authorlastname: e.target.value,
-                    });
-                  }}
-                  value={formData.authorlastname}
+                  name="authorlastname"
+                  // onChange={(e) => {
+                  //   setFormData({
+                  //     ...formData,
+                  //     authorlastname: e.target.value,
+                  //   });
+                  // }}
+                  // value={formData.authorlastname}
                 />
               </div>
               <div className="form-group">
@@ -89,11 +97,12 @@ const TitleSection = () => {
                 <input
                   type="file"
                   id="form-upload-img"
+                  name="image"
                   placeholder="Upload an image of your copy:"
-                  onChange={(e) => {
-                    setFormData({ ...formData, image: e.target.value });
-                  }}
-                  value={formData.image}
+                  // onChange={(e) => {
+                  //   setFormData({ ...formData, image: e.target.value });
+                  // }}
+                  // value={formData.image}
                 />
               </div>
               <div className="form-group">
@@ -101,14 +110,15 @@ const TitleSection = () => {
                 <select
                   type="select"
                   id="form-genre-one"
-                  onChange={(e) => {
-                    setFormData({ ...formData, genreone: e.target.value });
-                  }}
-                  value={formData.genreone}
+                  name="genreone"
+                  // onChange={(e) => {
+                  //   setFormData({ ...formData, genreone: e.target.value });
+                  // }}
+                  // value={formData.genreone}
                 >
                   <option value="chooseAGenre">Choose a genre</option>
-                  <option value="genreOne">genre one</option>
-                  <option value="genreTwo">genre two</option>
+                  <option value="romance">romance</option>
+                  <option value="classic">classic</option>
                 </select>
               </div>
               <div className="form-group">
@@ -116,16 +126,17 @@ const TitleSection = () => {
                 <select
                   type="select"
                   id="form-genre-two"
-                  onChange={(e) => {
-                    setFormData({ ...formData, genretwo: e.target.value });
-                  }}
-                  value={formData.genretwo}
+                  name="genretwo"
+                  // onChange={(e) => {
+                  //   setFormData({ ...formData, genretwo: e.target.value });
+                  // }}
+                  // value={formData.genretwo}
                 >
                   <option value="chooseASecondaryGenre">
                     Choose a secondary genre (Optional)
                   </option>
-                  <option value="genreOne">genre one</option>
-                  <option value="genreTwo">genre two</option>
+                  <option value="romance">romance</option>
+                  <option value="classic">classic</option>
                 </select>
               </div>
             </form>
@@ -143,4 +154,4 @@ const TitleSection = () => {
   );
 };
 
-export default TitleSection;
+export default AddBook;
