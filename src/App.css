@@ -43,6 +43,15 @@ h1 {
   font-size: 18px;
 }
 
+.navlist li a:visited {
+  color: inherit;
+}
+
+.navlist li a.active {
+  color: green;
+  font-weight: bold;
+}
+
 #title-section {
   position: relative;
   text-align: center;
