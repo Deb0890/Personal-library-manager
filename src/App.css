@@ -124,5 +124,15 @@ hr {
   width: 60%;
   background: #623412;
   margin: auto;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
+}
+
+.no-books-yet {
+  text-align: center;
+}
+
+.book-card {
+  border-style: solid;
+  border-color: #623412;
+  text-align: center;
 }
