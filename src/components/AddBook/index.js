@@ -2,24 +2,11 @@ import React, { useState } from "react";
 
 const AddBook = () => {
   const [modal, setModal] = useState(false);
-  // const [formData, setFormData] = useState({
-  //   booktitle: "",
-  //   authorfirstname: "",
-  //   authorlastname: "",
-  //   image: "",
-  //   genreone: "",
-  //   genretwo: "",
-  // });
+  const [formData, setFormData] = useState(null);
+  //formData isn't being used currently but may be useful when posting to actual server
+  //consider moving toggleModal to parent component, Books page.
   const toggleModal = () => {
     setModal(!modal);
-    // setFormData({
-    //   booktitle: "",
-    //   authorfirstname: "",
-    //   authorlastname: "",
-    //   image: "",
-    //   genreone: "",
-    //   genretwo: "",
-    // });
   };
 
   const handleSubmit = (e) => {
@@ -27,11 +14,7 @@ const AddBook = () => {
     toggleModal();
     const form = new FormData(e.currentTarget);
     const data = Object.fromEntries(form);
-    // Append new form data to the existing list
-    const updatedFormDataList = [...formDataList, data];
-    // Save updated form data list to local storage
-    localStorage.setItem("formDataList", JSON.stringify(updatedFormDataList));
-    setFormDataList(updatedFormDataList);
+    setFormData(data);
   };
 
   return (
