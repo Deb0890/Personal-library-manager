@@ -3,6 +3,9 @@ import { AddBook } from "../../components";
 
 const Books = () => {
   const [booksPresent, setBooksPresent] = useState(false);
+  // Note that useState default shouldn't be a boolean but rather based on what's available in the db.
+  // I've just used a boolean for now to toggle between the two options that can be returned
+  // and to show the card css I have currently.
   const message =
     "You currently have no books in your library. Add a book to get started.";
   return (

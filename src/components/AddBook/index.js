@@ -3,18 +3,51 @@ import React, { useState } from "react";
 const AddBook = () => {
   const [modal, setModal] = useState(false);
   const [formData, setFormData] = useState(null);
+  const [errors, setErrors] = useState({});
   //formData isn't being used currently but may be useful when posting to actual server
   //consider moving toggleModal to parent component, Books page.
   const toggleModal = () => {
     setModal(!modal);
+    setErrors({});
+  };
+
+  const formatFormData = (e) => {
+    const form = new FormData(e.currentTarget);
+    const data = Object.fromEntries(form); //form elements in an array now set in an object. This may not be needed to post to a server but makes it easier to see what is happening in the console
+    formValidationErrors(data);
+    setFormData(data);
+
+    console.log(form);
+  };
+  //line 16 is like instead of doing the following, for example:
+  // const body = {};
+  //   for (const [key, value] of form.entries()) {
+  //     body[key] = value;
+  //   }
+
+  const formValidationErrors = (data) => {
+    const newErrors = {};
+    if (!data.booktitle) {
+      newErrors.booktitle = "Book title is required";
+    }
+    if (!data.authorfirstname) {
+      newErrors.authorfirstname = "Author first name is required";
+    }
+    if (!data.authorlastname) {
+      newErrors.authorlastname = "Author last name is required";
+    }
+
+    setErrors(newErrors);
+    // If no errors, close modal
+    const isEmpty = Object.keys(newErrors).length === 0;
+    if (isEmpty) {
+      toggleModal();
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    toggleModal();
-    const form = new FormData(e.currentTarget);
-    const data = Object.fromEntries(form);
-    setFormData(data);
+    formatFormData(e);
   };
 
   return (
@@ -30,7 +63,7 @@ const AddBook = () => {
             <form
               action="POST"
               className="form"
-              id="main-form"
+              id="mainform"
               onSubmit={handleSubmit}
             >
               <div className="form-group">
@@ -44,6 +77,9 @@ const AddBook = () => {
                   // }}
                   // value={formData.booktitle}
                 />
+                {errors.booktitle && (
+                  <p className="validation-error-msg">{errors.booktitle}</p>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="form-author-fn">Author FIRST NAME</label>
@@ -59,6 +95,11 @@ const AddBook = () => {
                   // }}
                   // value={formData.authorfirstname}
                 />
+                {errors.authorfirstname && (
+                  <p className="validation-error-msg">
+                    {errors.authorfirstname}
+                  </p>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="form-author-ln">Author LAST NAME</label>
@@ -74,6 +115,11 @@ const AddBook = () => {
                   // }}
                   // value={formData.authorlastname}
                 />
+                {errors.authorlastname && (
+                  <p className="validation-error-msg">
+                    {errors.authorlastname}
+                  </p>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="form-upload-img"></label>
@@ -123,10 +169,10 @@ const AddBook = () => {
                 </select>
               </div>
             </form>
-            <button form="main-form" onClick={toggleModal}>
+            <button form="mainform" onClick={toggleModal}>
               Cancel
             </button>
-            <button form="main-form" type="submit">
+            <button form="mainform" type="submit">
               Save
             </button>
           </div>
