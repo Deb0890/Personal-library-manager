@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+/*HEADER AND NAVBAR*/
+.header {
+  /* width: 100%; */
+  height: 100px;
+  display: flex;
+  margin-bottom: 20px;
+  /* flex-direction: row; */
+}
+
+h1 {
+  width: 100%;
+  font-family: "Inter";
+  font-style: italic;
+  font-size: 2.65em;
+}
+
+.navbar {
+  display: flex;
+  /* width: 100%; */
+  align-items: center;
+  justify-content: space-between;
+  top: 0px;
+  padding: 10px 20px;
+}
+
+.navlist {
+  display: flex;
+  justify-self: flex-end;
+  list-style: none;
+}
+
+.navlist li {
+  margin-right: 20px;
+}
+
+.navlist li:last-child {
+  margin-left: 0;
+}
+
+.navlist li a {
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.navlist li a:visited {
+  color: inherit;
+}
+
+.navlist li a.active {
+  color: green;
+  font-weight: bold;
+}
+
+/*ADD A BOOK SECTION*/
+#title-section {
+  position: relative;
+  text-align: center;
+}
+
+.title {
+  font-family: "Inter";
+  margin-bottom: 10px;
+}
+
+#add-a-book {
+  padding: 5px 10px;
+  /* border: none; */
+  border-radius: 10px;
+  box-shadow: none;
+  background-color: #fae4dc;
+  border-color: #fae4dc;
+}
+
+/* MODAL */
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+#mainform {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: auto 20px 20px 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  align-self: start;
+}
+
+.modal-content button {
+  margin-right: 5px;
+}
+
+.modal-content input[type="submit"] {
+  margin-left: 5px;
+}
+
+.validation-error-msg {
+  color: red;
+}
+
+hr {
+  /* border: 3px solid #623412; */
+  position: relative;
+  top: 20px;
+  border: none;
+  height: 8px;
+  width: 60%;
+  background: #623412;
+  margin: auto;
+  margin-bottom: 50px;
+}
+
+/*BOOKS LIST*/
+
+.no-books-yet {
+  text-align: center;
+}
+
+.book-card {
+  border-style: solid;
+  border-color: #623412;
+  text-align: center;
+}
