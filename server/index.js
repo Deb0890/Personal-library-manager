@@ -3,8 +3,9 @@ const cors = require("cors");
 const app = express();
 
 app.use(express.json());
-var whitelist = ["*"];
-var corsOptions = {
+
+let whitelist = ["*"];
+let corsOptions = {
   credentials: true,
   origin: whitelist,
 };
