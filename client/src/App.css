@@ -135,12 +135,12 @@ hr {
 
 /*BOOKS LIST*/
 
-.no-books-yet {
+.no-books {
   text-align: center;
 }
 
-.book-card {
+/* .book-card {
   border-style: solid;
   border-color: #623412;
   text-align: center;
-}
+} */
