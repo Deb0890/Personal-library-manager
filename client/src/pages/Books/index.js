@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AddBook } from "../../components";
+import { AddBook, BookCard } from "../../components";
 
 const Books = () => {
   const [books, setBooks] = useState(null);
@@ -24,10 +24,9 @@ const Books = () => {
   return (
     <>
       <AddBook />
-      <div className="books">
-        <div className="book-card">
-          {books && books.map((book) => <p key={book._id}>{book.booktitle}</p>)}
-        </div>
+
+      <div className="books-list">
+        {books && books.map((book) => <BookCard key={book.id} book={book} />)}
       </div>
     </>
   );

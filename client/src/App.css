@@ -139,8 +139,39 @@ hr {
   text-align: center;
 }
 
-/* .book-card {
+.books-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  margin-right: 20%;
+  margin-left: 20%;
+}
+
+.single-book-card {
   border-style: solid;
   border-color: #623412;
-  text-align: center;
-} */
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 80px 2fr 1fr;
+  padding: 10px;
+  /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05); */
+  /* text-align: center; */
+}
+
+.single-book-card img {
+  width: 75px;
+  height: 100px;
+  /* float: left; */
+  margin: 0 1rem 0 0;
+}
+
+.single-book-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+}
+
+.book-info {
+}
+
+.single-book-card > p {
+}
