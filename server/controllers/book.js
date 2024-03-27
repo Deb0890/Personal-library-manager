@@ -1,14 +1,23 @@
 //The controller houses the logic that handles requests and responses. Each file should focus on a specific resource or functionality.
+const multer = require("multer");
 const Book = require("../models/book");
 const mongoose = require("mongoose");
 
-// GET ALL BOOKS
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+const upload = multer({ storage: storage });
 
-// note that the sort section may need to change/be altered if a sort feature is introduced on the frontend.
+// GET ALL BOOKS
 const getBooks = async (req, res) => {
   const books = await Book.find({}).sort({ createdAt: -1 });
   res.status(200).json(books);
-  console.log(books);
+  // console.log(books);
 };
 //-1 means that the books will be sorted in descending order (newest entries at the top)
 
@@ -42,28 +51,31 @@ const getBook = async (req, res) => {
 
 // CREATE A NEW BOOK
 const createBook = async (req, res) => {
-  const {
-    booktitle,
-    authorfirstname,
-    authorlastname,
-    genreone,
-    genretwo,
-    image,
-  } = req.body;
-  // add document to the database
   try {
+    let imagePath = null;
+    // Check if req.file exists and handle the case where it's undefined
+    if (req.file) {
+      imagePath = "uploads/" + req.file.filename;
+    }
+    const { booktitle, authorfirstname, authorlastname, genreone, genretwo } =
+      req.body;
+    // add document to the database
+
     const book = await Book.create({
       booktitle,
       authorfirstname,
       authorlastname,
       genreone,
       genretwo,
-      image,
+      image: imagePath,
     });
-    res.status(200).json(book);
+    res.status(201).json({ message: "Book created successfully.", book });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.error("Error creating book:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
+  console.log(req.body);
+  console.log(req.file);
 };
 
 // UPDATE A BOOK
@@ -100,4 +112,11 @@ const deleteBook = async (req, res) => {
   res.status(200).json(book);
 };
 
-module.exports = { getBooks, getBook, createBook, updateBook, deleteBook };
+module.exports = {
+  getBooks,
+  getBook,
+  createBook,
+  updateBook,
+  deleteBook,
+  upload: upload,
+};

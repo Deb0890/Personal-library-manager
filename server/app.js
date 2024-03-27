@@ -9,9 +9,9 @@ const bookRoutes = require("./routes/books");
 app.use(express.json());
 
 //an example of a middleware function with no mount path, thus it is executed everytime the app receives a request:
-app.use((req, res, next) => {
-  next();
-});
+// app.use((req, res, next) => {
+//   next();
+// });
 
 //routes
 

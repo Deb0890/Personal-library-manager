@@ -5,6 +5,7 @@ const {
   getBook,
   updateBook,
   deleteBook,
+  upload,
 } = require("../controllers/book");
 const router = express.Router();
 
@@ -15,7 +16,7 @@ router.get("/", getBooks);
 router.get("/:id", getBook);
 
 //POST a new book
-router.post("/", createBook);
+router.post("/", upload.single("image"), createBook);
 
 // PATCH a book
 router.patch("/:id", updateBook);

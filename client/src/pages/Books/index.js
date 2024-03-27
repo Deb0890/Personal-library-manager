@@ -26,7 +26,7 @@ const Books = () => {
       <AddBook />
 
       <div className="books-list">
-        {books && books.map((book) => <BookCard key={book.id} book={book} />)}
+        {books && books.map((book) => <BookCard key={book._id} book={book} />)}
       </div>
     </>
   );

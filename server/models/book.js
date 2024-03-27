@@ -24,7 +24,7 @@ const bookSchema = new Schema(
       required: false,
     },
     image: {
-      type: String,
+      type: Buffer,
       required: false,
     },
   },

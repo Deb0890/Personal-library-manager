@@ -2,52 +2,50 @@ import React, { useState } from "react";
 
 const AddBook = () => {
   const [modal, setModal] = useState(false);
-  const [formData, setFormData] = useState(null);
-  const [errors, setErrors] = useState({});
-  //formData isn't being used currently but may be useful when posting to actual server
+  // const [formData, setFormData] = useState(null);
+  // const [errors, setErrors] = useState({});
+  const [postError, setPostError] = useState(null);
+
   //consider moving toggleModal to parent component, Books page.
   const toggleModal = () => {
     setModal(!modal);
-    setErrors({});
+    // setErrors({});
   };
 
-  const formatFormData = (e) => {
-    const form = new FormData(e.currentTarget);
-    const data = Object.fromEntries(form); //form elements in an array now set in an object. This may not be needed to post to a server but makes it easier to see what is happening in the console
-    formValidationErrors(data);
-    setFormData(data);
-
-    console.log(data);
-  };
-  //line 16 is like instead of doing the following, for example:
-  // const body = {};
-  //   for (const [key, value] of form.entries()) {
-  //     body[key] = value;
-  //   }
-
-  const formValidationErrors = (data) => {
-    const newErrors = {};
-    if (!data.booktitle) {
-      newErrors.booktitle = "Book title is required";
-    }
-    if (!data.authorfirstname) {
-      newErrors.authorfirstname = "Author first name is required";
-    }
-    if (!data.authorlastname) {
-      newErrors.authorlastname = "Author last name is required";
-    }
-
-    setErrors(newErrors);
-    // If no errors, close modal
-    const isEmpty = Object.keys(newErrors).length === 0;
-    if (isEmpty) {
-      toggleModal();
-    }
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    formatFormData(e);
+    const booksApi = "/api/books";
+    const form = new FormData(e.currentTarget);
+    // const formData = Object.fromEntries(form);
+    const formData = {
+      booktitle: form.get("booktitle"),
+      authorfirstname: form.get("authorfirstname"),
+      authorlastname: form.get("authorlastname"),
+      genreone: form.get("genreone"),
+      genretwo: form.get("genretwo"),
+      image: form.get("image"),
+    };
+    //the image object being posted like this and passed through json.stringify is probably not ideal, but works for now. Try to understand a bit more about this.
+    console.log(formData);
+
+    const response = await fetch(booksApi, {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    const json = await response.json();
+
+    if (!response.ok) {
+      setPostError(json.error);
+    }
+    if (response.ok) {
+      toggleModal();
+      setPostError(null);
+      console.log("new book added");
+    }
   };
 
   return (
@@ -64,6 +62,7 @@ const AddBook = () => {
               action="POST"
               className="form"
               id="mainform"
+              encType="multipart/form-data"
               onSubmit={handleSubmit}
             >
               <div className="form-group">
@@ -77,9 +76,6 @@ const AddBook = () => {
                   // }}
                   // value={formData.booktitle}
                 />
-                {errors.booktitle && (
-                  <p className="validation-error-msg">{errors.booktitle}</p>
-                )}
               </div>
               <div className="form-group">
                 <label htmlFor="form-author-fn">Author FIRST NAME</label>
@@ -95,11 +91,6 @@ const AddBook = () => {
                   // }}
                   // value={formData.authorfirstname}
                 />
-                {errors.authorfirstname && (
-                  <p className="validation-error-msg">
-                    {errors.authorfirstname}
-                  </p>
-                )}
               </div>
               <div className="form-group">
                 <label htmlFor="form-author-ln">Author LAST NAME</label>
@@ -115,11 +106,6 @@ const AddBook = () => {
                   // }}
                   // value={formData.authorlastname}
                 />
-                {errors.authorlastname && (
-                  <p className="validation-error-msg">
-                    {errors.authorlastname}
-                  </p>
-                )}
               </div>
               <div className="form-group">
                 <label htmlFor="form-upload-img"></label>
@@ -151,7 +137,7 @@ const AddBook = () => {
                 </select>
               </div>
               <div className="form-group">
-                <label htmlFor="form-genre-one">Genre 2</label>
+                <label htmlFor="form-genre-two">Genre 2</label>
                 <select
                   type="select"
                   id="form-genre-two"
@@ -168,6 +154,7 @@ const AddBook = () => {
                   <option value="classic">classic</option>
                 </select>
               </div>
+              {postError && <div className="post-error">{postError}</div>}
             </form>
             <button form="mainform" onClick={toggleModal}>
               Cancel
