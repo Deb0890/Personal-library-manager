@@ -1,52 +1,56 @@
 import React, { useState } from "react";
 
-const AddBook = () => {
-  const [modal, setModal] = useState(false);
+const AddBook = ({ toggleModal, modal }) => {
   // const [formData, setFormData] = useState(null);
   // const [errors, setErrors] = useState({});
   const [postError, setPostError] = useState(null);
 
-  //consider moving toggleModal to parent component, Books page.
-  const toggleModal = () => {
-    setModal(!modal);
-    // setErrors({});
+  //Called 1st
+  const handleSubmit = (e) => {
+    formatFormData(e);
   };
 
-  const handleSubmit = async (e) => {
+  //called 2nd
+  const formatFormData = async (e) => {
     e.preventDefault();
-    const booksApi = "/api/books";
-    const form = new FormData(e.currentTarget);
-    // const formData = Object.fromEntries(form);
-    const formData = {
-      booktitle: form.get("booktitle"),
-      authorfirstname: form.get("authorfirstname"),
-      authorlastname: form.get("authorlastname"),
-      genreone: form.get("genreone"),
-      genretwo: form.get("genretwo"),
-      image: form.get("image"),
-    };
-    //the image object being posted like this and passed through json.stringify is probably not ideal, but works for now. Try to understand a bit more about this.
-    console.log(formData);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    // Took the 'object conversion' out as stringifying in json isn't needed with FormData object.
+    try {
+      const response = await postData(formData);
+      // Handle response as needed
+      console.log(response);
+    } catch (error) {
+      console.error("Error:", error);
+      // Handle error as needed
+    }
+  };
 
+  //called 3rd
+  const postData = async (formData) => {
+    const booksApi = "/api/books";
     const response = await fetch(booksApi, {
       method: "POST",
-      body: JSON.stringify(formData),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
+      body: formData,
     });
-    const json = await response.json();
+
+    const responseData = await response.json();
 
     if (!response.ok) {
-      setPostError(json.error);
+      console.log(responseData.error);
+      setPostError(responseData.error);
+      throw new Error(responseData.error || "Failed to add book");
     }
     if (response.ok) {
       toggleModal();
       setPostError(null);
       console.log("new book added");
     }
+
+    return responseData;
   };
+
+  //consider moving toggleModal to parent component, Books page.
 
   return (
     <div id="title-section">
@@ -154,8 +158,8 @@ const AddBook = () => {
                   <option value="classic">classic</option>
                 </select>
               </div>
-              {postError && <div className="post-error">{postError}</div>}
             </form>
+            {postError && <div className="post-error">{postError}</div>}
             <button form="mainform" onClick={toggleModal}>
               Cancel
             </button>
