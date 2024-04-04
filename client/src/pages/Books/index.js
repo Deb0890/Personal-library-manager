@@ -22,6 +22,7 @@ const Books = () => {
 
     fetchBooks();
   }, []);
+  //can't seem to add function as a dependency in useEffect so page rerenders on successful POST?
 
   //Called 1st
   const handleSubmit = (e) => {
@@ -62,6 +63,8 @@ const Books = () => {
     if (response.ok) {
       toggleModal();
       setPostError(null);
+      //immediately appends newly posted book to list. See note under useEffect
+      setBooks([responseData.book, ...books]);
       console.log("new book added");
     }
 
