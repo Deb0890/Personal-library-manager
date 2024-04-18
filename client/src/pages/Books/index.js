@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AddBook, BookCard } from "../../components";
+import { Link } from "react-router-dom";
 
 const Books = () => {
   const [modal, setModal] = useState(false);
@@ -81,7 +82,20 @@ const Books = () => {
       />
 
       <div className="books-list">
-        {books && books.map((book) => <BookCard key={book._id} book={book} />)}
+        {books &&
+          books.map((book) => (
+            <Link to={"/books/" + book._id} className="card-link">
+              <div className="single-book-card">
+                <img src={book.image} alt="" />
+                <div className="book-info">
+                  <h3>{book.booktitle}</h3>
+                  <p>{book.authorfirstname}</p>
+                  <p>{book.authorlastname}</p>
+                </div>
+                <p>space for info</p>
+              </div>
+            </Link>
+          ))}
       </div>
     </>
   );

@@ -59,8 +59,8 @@ const createBook = async (req, res) => {
     }
     const { booktitle, authorfirstname, authorlastname, genreone, genretwo } =
       req.body;
-    // add document to the database
 
+    // add document to the database
     const book = await Book.create({
       booktitle,
       authorfirstname,
@@ -72,7 +72,8 @@ const createBook = async (req, res) => {
     res.status(201).json({ message: "Book created successfully.", book });
   } catch (error) {
     console.error("Error creating book:", error);
-    res.status(500).json({ error: "Internal server error." });
+    res.status(400).json({ error: error.message });
+    // res.status(500).json({ error: "Internal server error." });
   }
   console.log(req.body);
   console.log(req.file);
