@@ -182,4 +182,14 @@ hr {
 
 .card-link {
   text-decoration: none;
+  color: black;
+}
+
+.card-link:visited {
+  color: black;
+}
+
+.card-link:hover {
+  box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.05);
+  /*or some recommended styling for hovering*/
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AddBook, BookCard } from "../../components";
+import { AddBook } from "../../components";
 import { Link } from "react-router-dom";
 
 const Books = () => {
@@ -84,7 +84,12 @@ const Books = () => {
       <div className="books-list">
         {books &&
           books.map((book) => (
-            <Link to={"/books/" + book._id} className="card-link">
+            <Link
+              to={`/books/${book._id}`}
+              key={book._id}
+              book={book}
+              className="card-link"
+            >
               <div className="single-book-card">
                 <img src={book.image} alt="" />
                 <div className="book-info">
