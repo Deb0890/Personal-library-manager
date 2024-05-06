@@ -85,7 +85,7 @@ const Books = () => {
         {books &&
           books.map((book) => (
             <Link
-              to={`/books/${book._id}`}
+              to={"/books/" + book._id}
               key={book._id}
               book={book}
               className="card-link"

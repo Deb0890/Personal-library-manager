@@ -193,3 +193,52 @@ hr {
   box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.05);
   /*or some recommended styling for hovering*/
 }
+
+/*BOOK PAGE*/
+
+.book-details-head {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 5px;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.book-image {
+  display: flex;
+  justify-self: end;
+  width: 75px;
+  height: 100px;
+  margin: 0 1rem 0 0;
+  border-style: solid;
+}
+
+.book-details-content {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 2fr 1fr;
+  column-gap: 5px;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+#loan-book,
+p {
+  text-align: center;
+}
+
+#loan-form {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-gap: 5px;
+
+  margin: 5px;
+}
+
+.loan-form-content {
+  background-color: #e89475;
+  border-style: solid;
+  border-radius: 5px;
+  /* padding: 5px; */
+}
