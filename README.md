@@ -9,3 +9,7 @@ POST /books - create a new book
 GET books/:id - get a single book page
 PATCH: book/:id - edit a books details
 DELETE: book/:id - delete a book
+
+## Future features
+
+Pagination

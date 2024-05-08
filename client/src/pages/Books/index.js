@@ -35,6 +35,7 @@ const Books = () => {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
+
     // Took the 'object conversion' out as stringifying in json isn't needed with FormData object.
     try {
       const response = await postData(formData);
@@ -107,11 +108,7 @@ const Books = () => {
 };
 
 export default Books;
-{
-  /* <a href="">
-<div className="book-card">book details</div>
-</a> */
-}
+
 //The message should only show when there is no book data present to retrieve
 //If there are books present they are retrieved and displayed
 //If no books, display message. Otherwise don't display message, display book.

@@ -23,6 +23,17 @@ const bookSchema = new Schema(
       type: String,
       required: false,
     },
+    borrower: {
+      type: String,
+    },
+    dateBorrowed: {
+      type: Date,
+      required: true,
+    },
+    dateReturned: {
+      type: Date,
+      required: true,
+    },
     image: {
       type: Buffer,
       required: false,

@@ -68,8 +68,19 @@ const createBook = async (req, res) => {
       genreone,
       genretwo,
       image: imagePath,
+      borrower: "",
+      dateBorrowed: "",
+      dateReturned: "",
     });
-    res.status(201).json({ message: "Book created successfully.", book });
+    res.status(201).json({
+      message: "Book created successfully.",
+      book: {
+        ...book.toObject(),
+        borrower: book.borrower,
+        dateBorrowed: book.dateBorrowed,
+        dateReturned: book.dateReturned,
+      },
+    });
   } catch (error) {
     console.error("Error creating book:", error);
     res.status(400).json({ error: error.message });
@@ -87,13 +98,30 @@ const updateBook = async (req, res) => {
     return res.status(404).json({ error: "No such book in your library!" });
   }
 
-  const book = await Book.findOneAndUpdate({ _id: id }, { ...req.body });
+  try {
+    // Extract specific fields to update from req.body
+    const { borrower, dateBorrowed, dateReturned } = req.body;
 
-  if (!book) {
-    return res.status(404).json({ error: "No such book in your library!" });
+    // Create update object with specified fields
+    const update = {};
+    if (borrower) update.borrower = borrower;
+    if (dateBorrowed) update.dateBorrowed = dateBorrowed;
+    if (dateReturned) update.dateReturned = dateReturned;
+
+    // Update the book using findOneAndUpdate
+    const book = await Book.findOneAndUpdate({ _id: id }, update, {
+      new: true,
+    });
+
+    if (!book) {
+      return res.status(404).json({ error: "No such book in your library!" });
+    }
+
+    res.status(200).json(book);
+  } catch (error) {
+    console.error("Error updating book:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
-
-  res.status(200).json(book);
 };
 
 // DELETE A BOOK

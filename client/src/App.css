@@ -223,7 +223,7 @@ hr {
   margin-right: 20%;
 }
 
-#loan-book,
+#loan-form-content,
 p {
   text-align: center;
 }
@@ -232,12 +232,21 @@ p {
   display: grid;
   grid-template-columns: max-content max-content;
   grid-gap: 5px;
-
   margin: 5px;
 }
 
 .loan-form-content {
   background-color: #e89475;
+  border-style: solid;
+  border-radius: 5px;
+  /* padding: 5px; */
+}
+.loan-details-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 5px;
+  background-color: #fae4dc;
   border-style: solid;
   border-radius: 5px;
   /* padding: 5px; */
