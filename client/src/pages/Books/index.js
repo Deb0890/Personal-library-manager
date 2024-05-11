@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const Books = () => {
   const [modal, setModal] = useState(false);
   const [books, setBooks] = useState(null);
+  // const [image, setImage] = useState([]);
   const [postError, setPostError] = useState(null);
   const booksUrl = "/api/books";
 
@@ -16,6 +17,7 @@ const Books = () => {
     const fetchBooks = async () => {
       const response = await fetch(booksUrl);
       const json = await response.json();
+
       if (response.ok) {
         setBooks(json);
       }
@@ -23,7 +25,7 @@ const Books = () => {
 
     fetchBooks();
   }, []);
-  //can't seem to add function as a dependency in useEffect so page rerenders on successful POST?
+  //can't seem to add function as a dependency in useEffect so page rerenders on successful POST, why? Ans. Used to handle side effects.
 
   //Called 1st
   const handleSubmit = (e) => {
@@ -36,7 +38,6 @@ const Books = () => {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    // Took the 'object conversion' out as stringifying in json isn't needed with FormData object.
     try {
       const response = await postData(formData);
       // Handle response as needed
@@ -49,8 +50,7 @@ const Books = () => {
 
   //called 3rd
   const postData = async (formData) => {
-    const booksApi = "/api/books";
-    const response = await fetch(booksApi, {
+    const response = await fetch(booksUrl, {
       method: "POST",
       body: formData,
     });
@@ -92,7 +92,7 @@ const Books = () => {
               className="card-link"
             >
               <div className="single-book-card">
-                <img src={book.image} alt="" />
+                <img src={`/${book.image}`} alt="" />
                 <div className="book-info">
                   <h3>{book.booktitle}</h3>
                   <p>{book.authorfirstname}</p>

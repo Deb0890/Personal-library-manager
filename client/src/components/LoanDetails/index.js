@@ -8,7 +8,7 @@ const LoanDetails = ({ formData, handleSubmit }) => {
   const convertedDateReturned = formatDateReturned.toLocaleDateString("en-GB");
 
   const handleFormSubmit = (e) => {
-    e.preventdefault;
+    e.preventDefault();
     const formData = {
       borrower: "",
       dateBorrowed: null,
@@ -20,12 +20,12 @@ const LoanDetails = ({ formData, handleSubmit }) => {
   return (
     <div className="loan-details-content">
       <p>Loan Details</p>
-      <form className="loan-details-content-form" onSubmit={handleFormSubmit}>
+      <div id="loan-details-content-box">
         <p>Who: {formData.borrower} </p>
         <p>Date borrowed: {convertedDateBorrowed}</p>
         <p>Expected return: {convertedDateReturned}</p>
-        <button type="submit">RETURN</button>
-      </form>
+        <button onClick={handleFormSubmit}>RETURN</button>
+      </div>
     </div>
   );
 };

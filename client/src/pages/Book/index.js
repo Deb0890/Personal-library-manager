@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { LoanForm, LoanDetails } from "../../components";
 
 const Book = () => {
   const { id } = useParams();
   const [book, setBook] = useState();
-  const bookUrl = "/api/books/" + id;
   const [showLoanForm, setShowLoanForm] = useState(true);
+  const navigate = useNavigate();
+  const bookUrl = "/api/books/" + id;
 
   useEffect(() => {
     console.log("useEffect");
@@ -83,6 +84,30 @@ const Book = () => {
     setShowLoanForm(true);
   };
 
+  const deleteBook = async () => {
+    try {
+      const confirmed = window.confirm(
+        "Are you sure you want to delete this book?"
+      );
+
+      if (confirmed) {
+        const response = await fetch(bookUrl, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          navigate("/books");
+        } else {
+          throw new Error("Failed to delete book");
+        }
+      } else {
+        console.log("deletion cancelled");
+      }
+    } catch (error) {
+      console.error("Error deleting book", error);
+    }
+  };
+
   return (
     <div className="book-details-container">
       {book ? (
@@ -97,6 +122,9 @@ const Book = () => {
             <div className="book-image">
               <img src={book.image} alt={book.booktitle} />
             </div>
+            <button id="delete-button" onClick={deleteBook}>
+              delete
+            </button>
           </div>
           <hr />
           <div className="book-details-content">

@@ -28,14 +28,12 @@ const bookSchema = new Schema(
     },
     dateBorrowed: {
       type: Date,
-      required: true,
     },
     dateReturned: {
       type: Date,
-      required: true,
     },
     image: {
-      type: Buffer,
+      type: String,
       required: false,
     },
   },

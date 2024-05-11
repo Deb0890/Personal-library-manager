@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const mongoose = require("mongoose");
 const app = require("./index");
 const PORT = process.env.PORT || 3000;
@@ -14,11 +15,13 @@ app.use(express.json());
 // });
 
 //routes
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use("/api/books", bookRoutes);
 // app.get("*", (req, res) => {
 //   res.sendFile(path.join(__dirname, "public", "index.html"));
 // });
+
 //add error handling page for 404
 
 //connect to db
