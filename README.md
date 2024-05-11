@@ -10,6 +10,11 @@ GET books/:id - get a single book page
 PATCH: book/:id - edit a books details
 DELETE: book/:id - delete a book
 
-## Future features
+## Future features to work on
 
-Pagination
+The following are ways the app can be improved:
+
+- Pagination
+- images to show up in thumbnail
+- indication in book card of loan status
+- configure 404 pages on frontend
