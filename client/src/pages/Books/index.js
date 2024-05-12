@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AddBook } from "../../components";
 import { Link } from "react-router-dom";
-
 const Books = () => {
   const [modal, setModal] = useState(false);
   const [books, setBooks] = useState(null);
@@ -17,7 +16,7 @@ const Books = () => {
     const fetchBooks = async () => {
       const response = await fetch(booksUrl);
       const json = await response.json();
-
+      console.log(json);
       if (response.ok) {
         setBooks(json);
       }
@@ -56,7 +55,6 @@ const Books = () => {
     });
 
     const responseData = await response.json();
-
     if (!response.ok) {
       console.log(responseData.error);
       setPostError(responseData.error);
@@ -86,13 +84,13 @@ const Books = () => {
         {books &&
           books.map((book) => (
             <Link
-              to={"/books/" + book._id}
+              to={`/books/${book._id}`}
               key={book._id}
               book={book}
               className="card-link"
             >
               <div className="single-book-card">
-                <img src={`/${book.image}`} alt="" />
+                <img src={`http://localhost:3000/${book.image}`} alt="" />
                 <div className="book-info">
                   <h3>{book.booktitle}</h3>
                   <p>{book.authorfirstname}</p>
