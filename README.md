@@ -14,7 +14,8 @@ DELETE: book/:id - delete a book
 
 The following are ways the app can be improved:
 
-- Pagination
-- images to show up in thumbnail
-- indication in book card of loan status
-- configure 404 pages on frontend
+[] Pagination
+[] images to show up in thumbnail within individual book page
+[] delete image from uploads folder when book is deleted
+[] indication in book card of loan status
+[] configure 404 response better (more consistently in backend and on individual pages on frontend)
