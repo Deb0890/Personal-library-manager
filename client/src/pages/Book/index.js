@@ -120,7 +120,10 @@ const Book = () => {
               </h2>
             </div>
             <div className="book-image">
-              <img src={book.image} alt={book.booktitle} />
+              <img
+                src={`http:localhost:3000/${book.image}`}
+                alt={book.booktitle}
+              />
             </div>
             <button id="delete-button" onClick={deleteBook}>
               delete

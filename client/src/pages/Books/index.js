@@ -3,7 +3,7 @@ import { AddBook } from "../../components";
 import { Link } from "react-router-dom";
 const Books = () => {
   const [modal, setModal] = useState(false);
-  const [books, setBooks] = useState(null);
+  const [books, setBooks] = useState([]);
   // const [image, setImage] = useState([]);
   const [postError, setPostError] = useState(null);
   const booksUrl = "/api/books";
@@ -81,7 +81,7 @@ const Books = () => {
       />
 
       <div className="books-list">
-        {books &&
+        {books.length > 0 ? (
           books.map((book) => (
             <Link
               to={`/books/${book._id}`}
@@ -90,7 +90,11 @@ const Books = () => {
               className="card-link"
             >
               <div className="single-book-card">
-                <img src={`http://localhost:3000/${book.image}`} alt="" />
+                <img
+                  src={`http://localhost:3000/${book.image}`}
+                  alt={`thumbnail for ${book.booktitle}`}
+                />{" "}
+                {/* Note that this is not ideal, tried to experiment with adding the url base into .env and calling from there but it didn't work so far */}
                 <div className="book-info">
                   <h3>{book.booktitle}</h3>
                   <p>{book.authorfirstname}</p>
@@ -99,7 +103,10 @@ const Books = () => {
                 <p>space for info</p>
               </div>
             </Link>
-          ))}
+          ))
+        ) : (
+          <p>There are no books in your library!</p>
+        )}
       </div>
     </>
   );

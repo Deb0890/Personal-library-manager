@@ -2,8 +2,8 @@ import Home from "../pages/Home";
 import { screen } from "@testing-library/react";
 
 describe("Homepage", () => {
-  beforeEach(() => {
-    render(Home);
+  beforeAll(() => {
+    render(<Home />);
   });
 
   test("homepage loads correctly", () => {
