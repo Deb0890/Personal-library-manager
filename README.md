@@ -19,3 +19,4 @@ The following are ways the app can be improved:
 [] delete image from uploads folder when book is deleted
 [] indication in book card of loan status
 [] configure 404 response better (more consistently in backend and on individual pages on frontend)
+[] component to indicate that there are no books in the library

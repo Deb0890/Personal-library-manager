@@ -16,8 +16,8 @@ app.use(express.json());
 
 //routes
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
 app.use("/api/books", bookRoutes);
+
 // app.get("*", (req, res) => {
 //   res.sendFile(path.join(__dirname, "public", "index.html"));
 // });
