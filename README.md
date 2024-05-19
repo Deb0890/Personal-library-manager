@@ -2,6 +2,23 @@
 
 A way to record and manage your personal library.
 
+## How to run application
+
+- Pull this repository down
+- cd into server folder
+- npm install packages
+- `npm run start` to start server
+im a different terminal:
+- cd into client folder
+- npm install packages
+- `npm run start` to start client
+
+### How to run tests
+
+Currently there a couple of unit tests on the client side of the application. to run them:
+- cd into client folder
+- `npm run test`
+
 ## Routes
 
 GET /books - get all the books
