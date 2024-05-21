@@ -23,7 +23,7 @@ const AddBook = ({ toggleModal, modal, postError, handleSubmit }) => {
                 <input
                   type="text"
                   id="form-book-title"
-                  name="booktitle"
+                  name="bookTitle"
                   // onChange={(e) => {
                   //   setFormData({ ...formData, booktitle: e.target.value });
                   // }}
@@ -35,7 +35,7 @@ const AddBook = ({ toggleModal, modal, postError, handleSubmit }) => {
                 <input
                   type="text"
                   id="form-author-fn"
-                  name="authorfirstname"
+                  name="authorFirstName"
                   // onChange={(e) => {
                   //   setFormData({
                   //     ...formData,
@@ -50,7 +50,7 @@ const AddBook = ({ toggleModal, modal, postError, handleSubmit }) => {
                 <input
                   type="text"
                   id="form-author-ln"
-                  name="authorlastname"
+                  name="authorLastName"
                   // onChange={(e) => {
                   //   setFormData({
                   //     ...formData,
@@ -78,7 +78,7 @@ const AddBook = ({ toggleModal, modal, postError, handleSubmit }) => {
                 <select
                   type="select"
                   id="form-genre-one"
-                  name="genreone"
+                  name="genreOne"
                   // onChange={(e) => {
                   //   setFormData({ ...formData, genreone: e.target.value });
                   // }}
@@ -94,7 +94,7 @@ const AddBook = ({ toggleModal, modal, postError, handleSubmit }) => {
                 <select
                   type="select"
                   id="form-genre-two"
-                  name="genretwo"
+                  name="genreTwo"
                   // onChange={(e) => {
                   //   setFormData({ ...formData, genretwo: e.target.value });
                   // }}

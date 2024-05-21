@@ -114,15 +114,15 @@ const Book = () => {
         <>
           <div className="book-details-head">
             <div className="book-details">
-              <h2 className="book-title">{book.booktitle}</h2>
+              <h2 className="book-title">{book.bookTitle}</h2>
               <h2 className="book-author">
-                {book.authorfirstname} {book.authorlastname}
+                {book.authorfirstname} {book.authorLastName}
               </h2>
             </div>
             <div className="book-image">
               <img
                 src={`http:localhost:3000/${book.image}`}
-                alt={book.booktitle}
+                alt={book.bookTitle}
               />
             </div>
             <button id="delete-button" onClick={deleteBook}>
@@ -133,7 +133,7 @@ const Book = () => {
           <div className="book-details-content">
             <div className="book-details-left">
               <p>
-                Genre(s): {book.genreone}, {book.genretwo}
+                Genre(s): {book.genreOne}, {book.genreTwo}
               </p>
             </div>
             {showLoanForm ? (

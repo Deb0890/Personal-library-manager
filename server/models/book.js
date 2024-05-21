@@ -3,23 +3,23 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bookSchema = new Schema(
   {
-    booktitle: {
+    bookTitle: {
       type: String,
       required: true,
     },
-    authorfirstname: {
+    authorFirstName: {
       type: String,
       required: true,
     },
-    authorlastname: {
+    authorLastName: {
       type: String,
       required: true,
     },
-    genreone: {
+    genreOne: {
       type: String,
       required: true,
     },
-    genretwo: {
+    genreTwo: {
       type: String,
       required: false,
     },

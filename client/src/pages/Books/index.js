@@ -92,13 +92,13 @@ const Books = () => {
               <div className="single-book-card">
                 <img
                   src={`http://localhost:3000/${book.image}`}
-                  alt={`thumbnail for ${book.booktitle}`}
+                  alt={`thumbnail for ${book.bookTitle}`}
                 />{" "}
                 {/* Note that this is not ideal, tried to experiment with adding the url base into .env and calling from there but it didn't work so far */}
                 <div className="book-info">
-                  <h3>{book.booktitle}</h3>
-                  <p>{book.authorfirstname}</p>
-                  <p>{book.authorlastname}</p>
+                  <h3>{book.bookTitle}</h3>
+                  <p>{book.authorFirstName}</p>
+                  <p>{book.authorlastName}</p>
                 </div>
                 <p>space for info</p>
               </div>
