@@ -3,6 +3,10 @@ const multer = require("multer");
 const Book = require("../models/book");
 const mongoose = require("mongoose");
 
+const isValidId = (id) => {
+  mongoose.Types.ObjectId.isValid(id);
+};
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads/");
@@ -26,7 +30,7 @@ const getBook = async (req, res) => {
   const { id } = req.params;
 
   //check if incoming id is valid. If not throw error.
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!isValidId(id)) {
     return res.status(404).json({ error: "No such book in your library!" });
   }
 
@@ -94,7 +98,7 @@ const createBook = async (req, res) => {
 const updateBook = async (req, res) => {
   const { id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!isValidId(id)) {
     return res.status(404).json({ error: "No such book in your library!" });
   }
 
@@ -128,7 +132,7 @@ const updateBook = async (req, res) => {
 const deleteBook = async (req, res) => {
   const { id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!isValidId(id)) {
     return res.status(404).json({ error: "No such book in your library!" });
   }
 
