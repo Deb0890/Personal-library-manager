@@ -3,10 +3,6 @@ const multer = require("multer");
 const Book = require("../models/book");
 const mongoose = require("mongoose");
 
-const isValidId = (id) => {
-  mongoose.Types.ObjectId.isValid(id);
-};
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads/");
@@ -30,7 +26,7 @@ const getBook = async (req, res) => {
   const { id } = req.params;
 
   //check if incoming id is valid. If not throw error.
-  if (!isValidId(id)) {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such book in your library!" });
   }
 
@@ -98,19 +94,13 @@ const createBook = async (req, res) => {
 const updateBook = async (req, res) => {
   const { id } = req.params;
 
-  if (!isValidId(id)) {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such book in your library!" });
   }
 
   try {
-    // Extract specific fields to update from req.body
-    const { borrower, dateBorrowed, dateReturned } = req.body;
-
-    // Create update object with specified fields
-    const update = {};
-    if (borrower) update.borrower = borrower;
-    if (dateBorrowed) update.dateBorrowed = dateBorrowed;
-    if (dateReturned) update.dateReturned = dateReturned;
+    //
+    const update = Book.createUpdateLoanObject(req.body);
 
     // Update the book using findOneAndUpdate
     const book = await Book.findOneAndUpdate({ _id: id }, update, {
@@ -132,7 +122,7 @@ const updateBook = async (req, res) => {
 const deleteBook = async (req, res) => {
   const { id } = req.params;
 
-  if (!isValidId(id)) {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such book in your library!" });
   }
 

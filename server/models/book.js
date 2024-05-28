@@ -40,6 +40,15 @@ const bookSchema = new Schema(
   { timestamps: true }
 );
 
+bookSchema.statics.createUpdateLoanObject = function (body) {
+  const { borrower, dateBorrowed, dateReturned } = body;
+  const update = {};
+  if (borrower) update.borrower = borrower;
+  if (dateBorrowed) update.dateBorrowed = dateBorrowed;
+  if (dateReturned) update.dateReturned = dateReturned;
+  return update;
+};
+
 //the schema defines the structure of the documents saved to a collection.
 
 module.exports = mongoose.model("Book", bookSchema);
