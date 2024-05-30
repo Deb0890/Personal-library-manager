@@ -54,13 +54,19 @@ const getBook = async (req, res) => {
 // The getBooks function for example doesn't need to explicitly use return because it's not relying on the return value to continue execution.
 
 // CREATE A NEW BOOK
+const getImagePath = (file) => {
+  if (file) {
+    return "uploads/" + file.filename;
+  }
+  return null;
+};
+
 const createBook = async (req, res) => {
   try {
-    let imagePath = null;
-    // Check if req.file exists and handle the case where it's undefined
-    if (req.file) {
-      imagePath = "uploads/" + req.file.filename;
-    }
+    const imagePath = getImagePath(req.file);
+    // if (req.file) {
+    //   imagePath = "uploads/" + req.file.filename;
+    // }
 
     // add document to the database
     const book = await Book.create(req.body, imagePath);
