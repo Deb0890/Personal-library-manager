@@ -106,7 +106,8 @@ const updateBook = async (req, res) => {
     res.status(200).json(book);
   } catch (error) {
     console.error("Error updating book:", error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(400).json({ error: error.message });
+    // res.status(500).json({ error: "Internal server error" });
   }
 };
 
