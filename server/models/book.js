@@ -25,12 +25,15 @@ const bookSchema = new Schema(
     },
     borrower: {
       type: String,
+      default: "",
     },
     dateBorrowed: {
       type: Date,
+      default: "",
     },
     dateReturned: {
       type: Date,
+      default: "",
     },
     image: {
       type: String,
