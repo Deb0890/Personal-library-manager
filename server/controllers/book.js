@@ -61,21 +61,9 @@ const createBook = async (req, res) => {
     if (req.file) {
       imagePath = "uploads/" + req.file.filename;
     }
-    const { bookTitle, authorFirstName, authorLastName, genreOne, genreTwo } =
-      req.body;
 
     // add document to the database
-    const book = await Book.create({
-      bookTitle,
-      authorFirstName,
-      authorLastName,
-      genreOne,
-      genreTwo,
-      image: imagePath,
-      borrower: "",
-      dateBorrowed: "",
-      dateReturned: "",
-    });
+    const book = await Book.create(req.body, imagePath);
     res.status(201).json({
       message: "Book created successfully.",
       book: {
