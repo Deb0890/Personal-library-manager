@@ -128,15 +128,12 @@ const deleteBook = async (req, res) => {
 
   if (!isValidId(id)) {
     return res.status(404).json({ error: "No such book in your library!" });
-  }
-
-  const book = await Book.findOneAndDelete({ _id: id });
-
-  if (!book) {
+  } else if (Book.hasBook(id)) {
+    const book = await Book.findOneAndDelete({ _id: id });
+    res.status(200).json(book);
+  } else {
     return res.status(404).json({ error: "No such book in your library!" });
   }
-
-  res.status(200).json(book);
 };
 
 module.exports = {
